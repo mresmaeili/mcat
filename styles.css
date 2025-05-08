@@ -4,7 +4,12 @@
   --secondary: #433dff;
   --accent: #8e85ff;
   --button-bg: #8e55ff;
-  --gradient: linear-gradient(135deg, #33d4ff, #433dff, #8e85ff);
+  --normal-bg: #a259ff;
+  --hover-bg: #1b2a3b;
+  --pressed-bg: #0f1f2d;
+  --disabled-bg: #e5d9f3;
+  --focus-ring: 2px dashed #00b8ff;
+  --gradient: linear-gradient(135deg, #33ddff, #3344ff, #b833ff);
 }
 
 * {
@@ -69,23 +74,37 @@ h2 {
   align-items: center;
 }
 
-.cta button {
+.subscribe-btn {
   width: 135px;
   height: 36px;
   padding: 8px 18px;
   border-radius: 100px;
-  background-color: var(--button-bg);
+  background-color: var(--normal-bg);
   color: white;
   border: none;
-  font-family: "Noto Sans", sans-serif;
   font-weight: 500;
   font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cta button:hover {
-  background-color: #726aff;
+.subscribe-btn:hover {
+  background-color: var(--hover-bg);
+}
+
+.subscribe-btn:active {
+  background-color: var(--pressed-bg);
+}
+
+.cta:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--focus-ring) var(--focus-ring);
+}
+
+.cta:disabled {
+  background-color: var(--disabled-bg);
+  color: #ffffff88;
+  cursor: not-allowed;
 }
 
 .cta span {
@@ -151,7 +170,22 @@ h2 {
 .gradient-bar {
   height: 200px;
   background: var(--gradient);
+  background-size: 200% 200%;
+  animation: moveGradient 6s ease-in-out infinite;
   transform: skewY(-11deg);
+  margin-top: -100px;
+}
+
+@keyframes moveGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @media (max-width: 900px) {
@@ -170,9 +204,7 @@ h2 {
   }
 
   .media {
-    width: 0;
-
-    transform: translateX(-100px);
+    width: 100%;
     pointer-events: none;
   }
 
